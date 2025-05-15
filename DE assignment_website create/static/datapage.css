@@ -1,0 +1,88 @@
+/* —— Header / Slide Titles —— */
+.title {
+  margin-left: 40px;
+  font-family: 'Merriweather', serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* —— Navigation Bar —— */
+.navbar {
+  position: fixed;
+  z-index: 100;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background-color: hsla(28, 58%, 40%, 0.6);
+}
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+}
+.navbar li {
+  display: inline;
+}
+.navbar a {
+  color: black;
+  text-decoration: none;
+  padding: 15px;
+  display: inline-block;
+  text-align: center;
+}
+.navbar a:hover {
+  background-color: hsl(0, 21%, 95%);
+}
+
+.slideshow-container {
+  margin: 80px auto 0;  
+  max-width: 1200px;
+  background-color: rgb(235, 212, 189);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: visible;
+  position: relative;
+}
+
+.slide {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 40px;   
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.first-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+.left-align { width: 45%; }
+.right-align {
+  width: 45%;
+  text-align: center;
+}
+/* ── Access Data: override home-page .slide p styles ── */
+.slide .right-align p {
+  width: auto !important;
+  height: auto !important;
+  margin: 0 0 1em !important;
+  padding: 0 ;
+  font-size: 15px ;    
+  line-height: 1.6 ;
+  text-align: left ;
+  color: #333 ;
+}
+
+.left-align .chart img {
+  width: 100%;
+  height: auto;
+  border-radius:8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  margin-left: 4%;
+}
+
+.first-section h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5em;
+}
+

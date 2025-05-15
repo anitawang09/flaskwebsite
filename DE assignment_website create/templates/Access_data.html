@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Flask Website</title>
+  <link
+  rel="stylesheet" href="{{ url_for('static', filename='datapage.css') }}?v=2"
+  type="text/css"/>
+</head>
+
+
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/Access_data">Access data</a></li>
+      <li><a href="/Introduction">Introduction</a></li>
+      <li><a href="/Contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <div class="slideshow-container">
+    <div class="slide">
+      <div class="first-section">
+        
+        <!-- LEFT: bar + heatmap -->
+        <div class="left-align">
+          <h2>Data Visualizations</h2>
+          <div class="chart">
+            <img src="{{ url_for('static', filename=heatmap) }}" alt="heatmap"> 
+          </div>
+          <div class="chart">
+            <img src="{{ url_for('static', filename=barchart) }}" alt="barchart">
+          </div>
+        </div>
+        
+        <!-- RIGHT: your analysis text -->
+        <div class="right-align">
+          <h2>Analysis</h2>
+          <p>
+            The heatmap clearly shows that greenhouse gas emissions consistently peak at the very beginning (Q1) and end (Q4) of each year. These warmer- and colder-season spikes are immediately apparent as the darkest cells along the top and bottom rows, indicating higher MtCO₂e values in March and December. By using a heatmap, seasonal and year-to-year patterns jump out at a glance—policy-makers and analysts can quickly identify recurring high-emission quarters, monitor whether mitigation efforts are shifting those hotspots over time, and allocate resources more effectively to target the worst offender periods.
+          </p>
+          <br><br><br>
+          <p>
+            The bar chart reveals a remarkably consistent trend: every March (the end of Q1) registers the highest emission rate compared to other quarters of the same year. This Q1 peak is visible as the tallest bar in each annual cluster, suggesting cyclical factors—perhaps post-winter energy demand or industrial ramp-ups—drive emissions upward each spring. A simple bar graph makes these quarterly comparisons unmistakable, allowing stakeholders to track those annual March surges and investigate the underlying drivers for targeted reduction strategies.
+          </p>
+        </div>
+  
+      </div>
+      <div class="second-section">
+
+  <script>
+    d3.csv("Indicator_1_1_quarterly_-7071251293967720840.csv.csv").then(function(data) {
+      // Filter only for 2024 Q2
+      const latestData = data.filter(d => d.quarter === "2024Q2");
+
+      const regions = latestData.map(d => d.country);
+      const emissions = latestData.map(d => +d.emission);
+
+      const plotData = [{
+        type: 'choropleth',
+        locationmode: 'geo',
+        locations: regions,
+        z: emissions,
+        text: regions,
+        colorscale: 'Reds',
+        colorbar: {
+          title: 'Billion Metric Tons CO₂e'
+        }
+      }];
+
+      const layout = {
+        geo: {
+          showframe: false,
+          showcoastlines: true,
+          projection: {
+            type: 'natural earth'
+          }
+        },
+        margin: { t: 0, b: 0 }
+      };
+
+      Plotly.newPlot('map', plotData, layout);
+    });
+  </script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+    const fig = JSON.parse(`{{ choropleth_json|safe }}`);
+    Plotly.newPlot('choropleth-map', fig.data, fig.layout);
+  </script>
+
+      </div>
+    </div>
+  </div>
+  
+  
+
+    
+</body>
+</html>
